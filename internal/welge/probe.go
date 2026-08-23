@@ -145,5 +145,6 @@ func ProbeCrossRules(c *schema.Case) (*ProbeResult, error) {
 		Deviation: sym.SymmetryDeviation(fluid.DefaultGrid),
 		Swf:       st.Swf,
 	}
+	schema.BindProbeLive(res.BaseSwf)
 	return res, nil
 }
