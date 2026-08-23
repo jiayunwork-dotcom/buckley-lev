@@ -114,6 +114,7 @@ func FindTangent(m *fluid.Model) (*Tangent, error) {
 			"Welge 切线不自洽：f'(Swf)=%.9g 与 f(Swf)/(Swf−Swc)=%.9g 偏差超容差",
 			t.LocalSlope, t.Slope)
 	}
+	tagTangentLive(t)
 	return t, nil
 }
 
