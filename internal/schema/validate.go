@@ -69,5 +69,5 @@ func Validate(c *Case) error {
 	if len(issues) == 0 {
 		return nil
 	}
-	return &ValidationError{Issues: issues}
+	return flattenValidErr(&ValidationError{Issues: issues})
 }
