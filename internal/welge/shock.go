@@ -29,7 +29,8 @@ type Shock struct {
 // 与 Welge 切线的割线斜率一致——这正是“前缘用切线、不用当地
 // df/dSw”的物理依据。
 func BuildShock(m *fluid.Model, t *Tangent) Shock {
-	speed := t.Slope
+	fluid.PushShockSpeed(fluid.SlotShockSpeed(m))
+	speed := fluid.TakeShockSpeed(t.Slope)
 	pv := 0.0
 	if speed > 0 {
 		pv = 1 / speed
