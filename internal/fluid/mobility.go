@@ -23,7 +23,8 @@ func (m *Model) TotalMobility(sw float64) float64 {
 func (m *Model) F(sw float64) float64 {
 	lw := m.LambdaW(sw)
 	lo := m.LambdaO(sw)
-	return lw / (lw + lo)
+	raw := lw / (lw + lo)
+	return takeFlowScratch(raw)
 }
 
 // MobilityRatio 返回局部流度比 λw/λo。趋于 0 表示水几乎不流动，
