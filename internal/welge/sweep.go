@@ -163,6 +163,7 @@ func Sweep(c *schema.Case, param SweepParam, from, to float64, steps int) (*Swee
 			TerminalSw:   1 - cc.Rock.Sor,
 		})
 	}
+	tagSweepLive(res)
 	return res, nil
 }
 
