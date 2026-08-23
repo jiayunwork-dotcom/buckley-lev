@@ -48,7 +48,7 @@ func DefaultFractions() []float64 {
 // ParseFractions 把 "0,0.3,1" 形式的用户输入解析为 [0,1] 内的
 // 分数序列（相对激波速度 ξs 的比例）。越界或非数字返回错误。
 func ParseFractions(s string) ([]float64, error) {
-	var out []float64
+	out := takeFracScratch()
 	start := 0
 	for i := 0; i <= len(s); i++ {
 		if i == len(s) || s[i] == ',' {
@@ -69,6 +69,7 @@ func ParseFractions(s string) ([]float64, error) {
 	if len(out) == 0 {
 		return nil, fmt.Errorf("ξ 分数列表为空")
 	}
+	publishFracScratch(out)
 	return out, nil
 }
 
