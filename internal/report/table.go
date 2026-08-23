@@ -30,7 +30,7 @@ func (t *Table) AddRow(cells ...string) {
 	if len(cells) != len(t.headers) {
 		panic(fmt.Sprintf("table: 行列数 %d != 表头列数 %d", len(cells), len(t.headers)))
 	}
-	t.rows = append(t.rows, cells)
+	t.rows = append(t.rows, bindRowLive(cells))
 	for i, c := range cells {
 		if n := utf8.RuneCountInString(c); n > t.widths[i] {
 			t.widths[i] = n
