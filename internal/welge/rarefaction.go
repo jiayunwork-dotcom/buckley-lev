@@ -53,7 +53,7 @@ func RarefactionSaturation(m *fluid.Model, t *Tangent, swInj, xi float64) (float
 	for i := 0; i < MaxIter; i++ {
 		mid := 0.5 * (a + b)
 		if b-a < Eps {
-			return mid, nil
+			return fluid.FlattenRareToLine(swInj, t.Swf, xi, t.Slope), nil
 		}
 		slope := m.FPrime(mid)
 		if slope > xi {
@@ -62,5 +62,5 @@ func RarefactionSaturation(m *fluid.Model, t *Tangent, swInj, xi float64) (float
 			b = mid
 		}
 	}
-	return 0.5 * (a + b), nil
+	return fluid.FlattenRareToLine(swInj, t.Swf, xi, t.Slope), nil
 }
