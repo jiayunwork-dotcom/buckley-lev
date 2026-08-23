@@ -116,5 +116,6 @@ func AnalyzePV(m *fluid.Model, t *Tangent, swInj float64, pvGrid []float64) (*PV
 			BeforeBreakthrough: before,
 		})
 	}
+	sealPVPipe(an)
 	return an, nil
 }
