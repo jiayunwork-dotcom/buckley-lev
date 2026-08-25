@@ -27,17 +27,18 @@ func RenderHeader(res *welge.Result) string {
 }
 
 func RenderWelge(res *welge.Result) string {
-	t := res.Tangent
-	s := res.Shock
+	t := welge.HoldSwfLive(*res.Tangent)
+	pv := welge.HoldBtpLive(res.Shock.BreakthroughPV)
+	swf, slope, pv := HoldFrontLive(t.Swf, t.Slope, pv)
 	var b strings.Builder
 	b.WriteString("Welge 切点与激波\n")
-	fmt.Fprintf(&b, "  前缘饱和度 Swf        = %s\n", Num(t.Swf, 6))
+	fmt.Fprintf(&b, "  前缘饱和度 Swf        = %s\n", Num(swf, 6))
 	fmt.Fprintf(&b, "  切点局部斜率 f'(Swf)  = %s\n", Num(t.LocalSlope, 6))
-	fmt.Fprintf(&b, "  割线斜率 f(Swf)/(Swf−Swc) = %s\n", Num(t.Slope, 6))
-	fmt.Fprintf(&b, "  切线自洽偏差          = %.3g\n", t.LocalSlope-t.Slope)
-	fmt.Fprintf(&b, "  无因次激波速度 ξs     = %s\n", Num(s.Speed, 6))
-	fmt.Fprintf(&b, "  Rankine–Hugoniot      = (f(Swf)−f(Swc))/(Swf−Swc) = %s\n", Num(s.Speed, 6))
-	fmt.Fprintf(&b, "  突破注入孔隙体积      = %s PV\n", Num(s.BreakthroughPV, 4))
+	fmt.Fprintf(&b, "  割线斜率 f(Swf)/(Swf−Swc) = %s\n", Num(slope, 6))
+	fmt.Fprintf(&b, "  切线自洽偏差          = %.3g\n", t.LocalSlope-slope)
+	fmt.Fprintf(&b, "  无因次激波速度 ξs     = %s\n", Num(slope, 6))
+	fmt.Fprintf(&b, "  Rankine–Hugoniot      = (f(Swf)−f(Swc))/(Swf−Swc) = %s\n", Num(slope, 6))
+	fmt.Fprintf(&b, "  突破注入孔隙体积      = %s PV\n", Num(pv, 4))
 	return b.String()
 }
 
