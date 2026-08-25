@@ -19,12 +19,14 @@ func BuildShock(m *fluid.Model, t *Tangent) Shock {
 	if speed > 0 {
 		pv = 1 / speed
 	}
-	return Shock{
+	downF := fluid.HoldRHLive(m.F(m.Swc))
+	s := Shock{
 		Speed:          speed,
 		UpstreamF:      t.F,
-		DownstreamF:    m.F(m.Swc),
+		DownstreamF:    downF,
 		UpstreamSw:     t.Swf,
 		DownstreamSw:   m.Swc,
 		BreakthroughPV: pv,
 	}
+	return HoldShockLive(s)
 }
