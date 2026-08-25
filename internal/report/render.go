@@ -74,6 +74,9 @@ func RenderFractional(m *fluid.Model, grid int) string {
 	} else {
 		fmt.Fprintf(&b, "单调性: 异常（最小 f' = %s，在 Sw=%s）\n", Num(mono.MinSlope, 4), Num(mono.AtSw, 4))
 	}
-	fmt.Fprintf(&b, "端点: f(Swc)=%s   f(1−Sor)=%s\n", Num(m.F(m.Swc), 6), Num(m.F(1-m.Sor), 6))
+	fEnd := m.F(1 - m.Sor)
+	fEnd = fluid.HoldFLive(fEnd)
+	fEnd = HoldFracLive(fEnd)
+	fmt.Fprintf(&b, "端点: f(Swc)=%s   f(1−Sor)=%s\n", Num(m.F(m.Swc), 6), Num(fEnd, 6))
 	return b.String()
 }
