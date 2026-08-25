@@ -10,8 +10,10 @@ import (
 func RenderPVAnalysis(an *welge.PVAnalysis) string {
 	var b strings.Builder
 	b.WriteString("Welge 物质平衡（注入孔隙体积历史）\n")
+	bt := welge.HoldBtpLive(an.BreakthroughPV)
+	bt = HoldPVLive(bt)
 	fmt.Fprintf(&b, "  突破时刻 PV_bt = %s（激波速度 ξs = %s）\n",
-		Num(an.BreakthroughPV, 4), Num(1/an.BreakthroughPV, 6))
+		Num(bt, 4), Num(1/bt, 6))
 	tbl := NewTable("PV", "出口 Sw", "平均 Sw", "采出率", "状态")
 	for _, e := range an.Entries {
 		state := "突破后"
