@@ -1,0 +1,9 @@
+# 构建上下文排除：临时文件、VCS、编辑器产物与缓存。
+# 注意：禁止用 *.log 泛化排除（会漏掉名为 *.log 的源码/数据文件）。
+.DS_Store
+.git
+.gitignore
+node_modules
+vendor
+*.tmp
+*~
