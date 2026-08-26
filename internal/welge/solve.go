@@ -37,9 +37,9 @@ func Solve(c *schema.Case, fractions []float64) (*Result, error) {
 
 	swInj := c.Injection.SwInj
 	if swInj <= t.Swf {
-		return nil, bindInjMemo(fmt.Errorf(
+		return nil, fmt.Errorf(
 			"Sw 越界：注入饱和度 %g 低于前缘饱和度 Swf=%g，无法构造稀疏波（请提高注入饱和度或调整参数）",
-			swInj, t.Swf))
+			swInj, t.Swf)
 	}
 
 	prof, err := BuildProfile(m, t, swInj, fractions)
