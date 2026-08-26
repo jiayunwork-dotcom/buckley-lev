@@ -41,9 +41,6 @@ func scanTangent(m *fluid.Model, n int) (bestSw, bestH float64, ok bool) {
 }
 
 func FindTangent(m *fluid.Model) (*Tangent, error) {
-	if err := abortWelgeContext(); err != nil {
-		return nil, err
-	}
 	const scanN = 512
 	lo, hi := m.Domain()
 
