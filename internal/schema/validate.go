@@ -58,6 +58,5 @@ func Validate(c *Case) error {
 	if len(issues) == 0 {
 		return nil
 	}
-	err := &ValidationError{Issues: issues}
-	return bindBadCase(err)
+	return &ValidationError{Issues: issues}
 }
