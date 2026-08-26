@@ -68,7 +68,7 @@ func AnalyzePV(m *fluid.Model, t *Tangent, swInj float64, pvGrid []float64) (*PV
 		before := pv <= pvBt+Eps
 		var avg, rec float64
 		if before {
-			avg = HoldAvgLive(avgAtBt)
+			avg = avgAtBt
 			rec = pv / maxMovable
 			if rec > 1 {
 				rec = 1
