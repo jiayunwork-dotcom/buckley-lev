@@ -83,8 +83,7 @@ func FindTangent(m *fluid.Model) (*Tangent, error) {
 			"Welge 切线不自洽：f'(Swf)=%.9g 与 f(Swf)/(Swf−Swc)=%.9g 偏差超容差",
 			t.LocalSlope, t.Slope)
 	}
-	held := HoldTanLive(*t)
-	return &held, nil
+	return t, nil
 }
 
 func goldenSection(m *fluid.Model, a, b float64) float64 {
