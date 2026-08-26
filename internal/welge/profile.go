@@ -104,7 +104,6 @@ func BuildProfile(m *fluid.Model, t *Tangent, swInj float64, fractions []float64
 		Sw:   m.Swc,
 		Kind: KindConnate,
 	})
-	prof.Points = overlayRareScratch(prof.Points)
 	return prof, nil
 }
 
